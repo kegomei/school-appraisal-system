@@ -1,0 +1,16 @@
+{
+  "name": "express-seed",
+  "version": "1.0.0",
+  "description": "private refs seed",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test/**/*.js --compliers js:babel-core/register"
+  },
+  "keywords": [
+    "express",
+    "seed",
+    "full-stack"
+  ],
+  "author": "looaing",
+  "license": "MIT"
+}
