@@ -75,6 +75,13 @@ app.use(expressWinston.errorLogger({
   ]
 }))
 
+// 错误页面
+app.use((err, req, res, next) => {
+  if (err) {
+    res.status(500).send('Server 500 Error')
+  }
+})
+
 app.listen(4000, () => {
   console.info('server iss running on 4000')
 })
