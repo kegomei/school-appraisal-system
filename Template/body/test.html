@@ -1,0 +1,15 @@
+<h1 class="text-center"><%- title %></h1>
+<div class="testArea" ng-controller="fileTestCtrl">
+  <form name="fileForm" accept-charset="utf-8" method="post" action="/test/upload" enctype="multipart/form-data" >
+    <input type="text" name="name" value="" ng-model="fileName">
+    {{ fileName }}
+    <input type="file" name="looading">
+    <button class="btn btn-primary">提交</button>
+  </form>
+
+  <div class="showArea">
+    <ul>
+      <li ng-repeat="item in lists" ng-bind="item"></li>
+    </ul>
+  </div>
+</div>

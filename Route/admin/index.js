@@ -5,7 +5,7 @@ class Index extends Action {
     res.render('Layer', {
       body: req.path,
       path: {
-        body: 'body/login.html'
+        body: 'body/admin.html'
       }
     })
   }

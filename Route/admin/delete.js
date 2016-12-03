@@ -1,17 +1,17 @@
 const { Action } = require('express-route-auto')
 
-class Index extends Action {
+class Delete extends Action {
   get (req, res, next) {
     res.render('Layer', {
       body: req.path,
       path: {
-        body: 'body/login.html'
+        body: 'body/admin.html'
       }
     })
   }
   post (req, res, next) {
-    res.send('this is post::index')
+    res.send('this is post::Delete')
   }
 }
 
-module.exports = new Index()
+module.exports = new Delete()
