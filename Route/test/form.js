@@ -1,15 +1,21 @@
 const { Action } = require('express-route-auto')
 
-class Index extends Action {
+class Form extends Action {
   constructor () {
     super()
     this.User = this.Model.User
   }
   _get (req, res, next) {
     res.render('Layer', {
-      title: req.path,
-      path: {
-        body: 'body/test.html'
+      user: {
+        name: '通信工程学院'
+      },
+      page: {
+        body: 'body/admin.html',
+        panel: '../page/add.html',
+        siderbar: {
+          active: 0
+        }
       }
     })
   }
@@ -24,4 +30,4 @@ class Index extends Action {
   }
 }
 
-module.exports = new Index()
+module.exports = new Form()

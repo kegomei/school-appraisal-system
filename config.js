@@ -1,6 +1,6 @@
 const DataBase = require('./Model')
 
-let { User, File } = new DataBase()
+let { User, File, Result } = new DataBase()
 
 module.exports = {
   // routeDir 是必须的
@@ -10,6 +10,7 @@ module.exports = {
 
   Model: {
     User,
-    File
+    File,
+    Result
   }
 }

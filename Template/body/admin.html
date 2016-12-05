@@ -1,3 +1,10 @@
-<h1>
-  <%- body %>
-</h1>
+<%- include('../public/header.html') %>
+
+<div class="row">
+  <div class="col-md-2">
+    <%- include('../public/siderbar.html') %>
+  </div>
+  <div class="col-md-8">
+    <%- include(page.panel) %>
+  </div>
+</div>

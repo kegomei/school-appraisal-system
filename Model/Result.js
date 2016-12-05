@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize')
 const Model = require('./Model')
 
-class User extends Model {
+class Result extends Model {
   constructor (seqli) {
     super(seqli)
     this.model = this.initModel()
   }
 
   initModel () {
-    return this.seqli.define('user', {
+    return this.seqli.define('result', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -18,22 +18,15 @@ class User extends Model {
           isInt: true
         }
       },
-      name: {
+      title: {
         type: Sequelize.STRING(255),
         defaultValue: '0',
         validate: {
         }
       },
-      account: {
-        type: Sequelize.STRING(255),
-        defaultValue: '0',
-        validate: {
-          isUnique: this.seqli.validateIsUnique('openid')
-        }
-      },
-      passwd: {
-        type: Sequelize.STRING(255),
-        defaultValue: '0',
+      uid: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
         validate: {
         }
       }
@@ -41,13 +34,6 @@ class User extends Model {
       timestamps: true
     })
   }
-
-  isExisted (obj) {
-    return this.find(obj)
-      .then((data) => {
-        return data
-      })
-  }
 }
 
-module.exports = User
+module.exports = Result

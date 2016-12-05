@@ -1,7 +1,7 @@
 const { Action } = require('express-route-auto')
 
 class Delete extends Action {
-  get (req, res, next) {
+  _get (req, res, next) {
     res.render('Layer', {
       body: req.path,
       path: {
@@ -9,7 +9,7 @@ class Delete extends Action {
       }
     })
   }
-  post (req, res, next) {
+  _post (req, res, next) {
     res.send('this is post::Delete')
   }
 }

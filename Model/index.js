@@ -9,13 +9,13 @@ var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.passwd,
 // 获取表
 const User = new (require('./User'))(sequelize)
 const File = new (require('./File'))(sequelize)
-// const History = new (require('./History'))(sequelize)
+const Result = new (require('./Result'))(sequelize)
 
 class DataBase {
   constructor () {
     this.User = User
     this.File = File
-    // this.History = History
+    this.Result = Result
 
     sequelize
       .authenticate()

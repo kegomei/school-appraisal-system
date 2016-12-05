@@ -1,15 +1,46 @@
 const { Action } = require('express-route-auto')
 
 class Index extends Action {
-  get (req, res, next) {
-    res.render('Layer', {
-      body: req.path,
-      path: {
-        body: 'body/admin.html'
-      }
-    })
+  _get (req, res, next) {
+    let Result = this.Model.Result
+
+    Result
+      .findAll({
+        where: {
+          uid: req.session.user.id
+        }
+      })
+      .then((data) => {
+        res.render('Layer', {
+          body: req.path,
+          user: req.session.user,
+          lists: data,
+          page: {
+            body: 'body/admin.html',
+            panel: '../page/index.html',
+            siderbar: {
+              active: 0
+            }
+          }
+        })
+      })
+      .catch((err) => {
+        console.error(`数据库查询错误: ${err}`)
+        res.render('Layer', {
+          body: req.path,
+          user: req.session.user,
+          lists: [],
+          page: {
+            body: 'body/admin.html',
+            panel: '../page/index.html',
+            siderbar: {
+              active: 0
+            }
+          }
+        })
+      })
   }
-  post (req, res, next) {
+  _post (req, res, next) {
     res.send('this is post::index')
   }
 }

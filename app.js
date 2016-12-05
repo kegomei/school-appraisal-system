@@ -7,7 +7,8 @@ const session = require('express-session')
 const path = require('path')
 const winston = require('winston')
 const expressWinston = require('express-winston')
-const formidable = require('express-formidable')
+const { matchArray } = require('./Libs')
+
 
 const configs = require('./config')
 const { config, Generate } = require('express-route-auto')
@@ -53,38 +54,34 @@ app.set('view engine', 'html')
 app.set('views', path.join(__dirname, '/Template'))
 // 设置公共资源目录
 app.use(express.static(path.join(__dirname, '/Static')))
+// 设置Angular模板目录
+app.use(express.static(path.join(__dirname, '/Template/partials')))
 
 // 路由日志
 app.use((req, res, next) => {
-  pathLog(req.path)
+  pathLog('%s, method: %s', req.path, req.method)
   next()
 })
 
 // 权限控制
 app.use((req, res, next) => {
-  let whiteList = [ '/', '/login', '/signout', '/test', '/test/upload' ]
-  appLog('session: %s, url: %s, In whiteList? : %s', req.session.user, req.url, whiteList.indexOf(req.url))
-  if (req.session.user) {
-    next()
-  } else {
-    if (whiteList.indexOf(req.url) === -1) {
-      res.redirect('/login')
-    } else {
+  let whiteList = [ '^/$', '^/login$', '^/admin/signout$', '^/test', '^/favicon.ico$' ]
+  appLog('session: %s, url: %s, In whiteList? : %s, method: %s', req.session.user, req.url, whiteList.indexOf(req.url), req.method)
+  console.error(matchArray(whiteList, req.url), req.url)
+  if (!matchArray(whiteList, req.url)) {
+    if (req.session.user) {
       next()
+    } else {
+      res.redirect('/login')
     }
+  } else {
+    next()
   }
 })
-
-// 文件上传处理模块
-app.use(formidable({
-  encoding: 'utf-8',
-  uploadDir: 'Uploads',
-  multiples: true // req.files to be arrays of files
-}))
-
 // 生成路由
 let generate = new Generate()
-app.use(generate())
+let routes = generate()
+app.use(routes)
 
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
@@ -101,7 +98,6 @@ app.use(expressWinston.errorLogger({
 
 // 错误页面
 app.use((err, req, res, next) => {
-
   if (err) {
     console.log(err)
     res.status(500).send({

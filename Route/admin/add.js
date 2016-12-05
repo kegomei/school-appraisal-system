@@ -1,15 +1,20 @@
 const { Action } = require('express-route-auto')
 
 class Add extends Action {
-  get (req, res, next) {
+  _get (req, res, next) {
     res.render('Layer', {
       body: req.path,
-      path: {
-        body: 'body/admin.html'
+      user: req.session.user,
+      page: {
+        body: 'body/admin.html',
+        panel: '../page/add.html',
+        siderbar: {
+          active: 1
+        }
       }
     })
   }
-  post (req, res, next) {
+  _post (req, res, next) {
     res.send('this is post::Add')
   }
 }
