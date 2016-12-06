@@ -8,8 +8,6 @@ const path = require('path')
 const winston = require('winston')
 const expressWinston = require('express-winston')
 const { matchArray } = require('./Libs')
-
-
 const configs = require('./config')
 const { config, Generate } = require('express-route-auto')
 
@@ -82,7 +80,6 @@ app.use((req, res, next) => {
 let generate = new Generate()
 let routes = generate()
 app.use(routes)
-
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
   transports: [
@@ -105,7 +102,6 @@ app.use((err, req, res, next) => {
     })
   }
 })
-
 app.listen(4000, () => {
   console.info('server iss running on 4000')
 })
