@@ -1,9 +1,9 @@
 module.exports = {
   database: 'schoolsystem',
   user: 'root',
-  passwd: 'ctyloading',
+  passwd: 'looading',
   options: {
-    host: 'localhost',
+    host: 'refs.ctyloading.cn',
     dialect: 'mysql',
     pool: {
       max: 5,

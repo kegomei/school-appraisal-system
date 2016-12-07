@@ -3,13 +3,17 @@ const { Action } = require('express-route-auto')
 class Index extends Action {
   _get (req, res, next) {
     let Result = this.Model.Result
-
-    Result
-      .findAll({
+    let whereOpts = {}
+    let { role } = req.session.user
+    if (role === 0) {
+      whereOpts = {
         where: {
           uid: req.session.user.id
         }
-      })
+      }
+    }
+    Result
+      .findAll(whereOpts)
       .then((data) => {
         res.render('Layer', {
           body: req.path,

@@ -36,6 +36,13 @@ class User extends Model {
         defaultValue: '0',
         validate: {
         }
+      },
+      role: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        validate: {
+          isInt: true
+        }
       }
     }, {
       timestamps: true

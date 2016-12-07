@@ -68,7 +68,6 @@ app
               default:
                 console.error('未知名错误')
             }
-            
           }, function(error) {
             alertService.add({
               type: 'danger',
@@ -76,6 +75,11 @@ app
             })
           })
       }
+    }
+
+
+    $scope.keypressHandle = function(ev) {
+      console.log(ev)
     }
   }])
 
@@ -95,4 +99,3 @@ app
         })
     }
   }])
-  .controller('')

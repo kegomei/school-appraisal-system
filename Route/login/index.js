@@ -29,7 +29,8 @@ class Index extends Action {
         req.session.user = {
           name: data.get('name'),
           account: data.get('account'),
-          id: data.get('id')
+          id: data.get('id'),
+          role: data.get('role')
         }
         res.send({
           status: 200,
