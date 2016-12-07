@@ -13,4 +13,6 @@ nodemon.on('start', () => {
   console.warn(`App has quit\n|-|-|-|-||-|-|-|-||-|-|-|-|\n`)
 }).on('restart', (files) => {
   console.error(`\nApp restarted due to: ${files}\n****************\n`)
+}).on('errot', () => {
+  console.error('something wrong')
 })

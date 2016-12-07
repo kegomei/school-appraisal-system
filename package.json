@@ -4,7 +4,10 @@
   "description": "private refs seed",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test/**/*.js --compliers js:babel-core/register"
+    "test": "mocha test/**/*.js --compliers js:babel-core/register",
+    "dev": "npm-run-all --parallel start watch",
+    "watch": "gulp",
+    "start": "node restart.js"
   },
   "keywords": [
     "express",
@@ -37,14 +40,17 @@
     "assert": "^1.4.1",
     "babel-core": "^6.18.2",
     "babel-preset-es2015": "^6.18.0",
+    "browser-sync": "^2.18.2",
     "chai": "^3.5.0",
     "debug": "^2.3.3",
     "eslint": "^3.11.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
+    "gulp": "^3.9.1",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
+    "npm-run-all": "^3.1.2",
     "supertest": "^2.0.1"
   }
 }
