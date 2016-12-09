@@ -10,6 +10,8 @@ const expressWinston = require('express-winston')
 const { matchArray } = require('./Libs')
 const configs = require('./config')
 const { config, Generate } = require('express-route-auto')
+const util = require('util')
+
 
 config.add(configs)
 let pathLog = debug('path')
@@ -79,7 +81,10 @@ app.use((req, res, next) => {
 // 生成路由
 let generate = new Generate()
 let routes = generate()
-app.use(routes)
+
+app.use('/', routes)
+
+//console.log(util.inspect(app._router,{depth:5, showHidden:true}))
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
   transports: [
