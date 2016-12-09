@@ -85,7 +85,10 @@ app.use((req, res, next) => {
 // 生成路由
 let generate = new Generate()
 let routes = generate()
-app.use(routes)
+
+app.use('/', routes)
+
+//console.log(util.inspect(app._router,{depth:5, showHidden:true}))
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
   transports: [
