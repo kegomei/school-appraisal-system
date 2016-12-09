@@ -10,6 +10,8 @@ const expressWinston = require('express-winston')
 const { matchArray } = require('./Libs')
 const configs = require('./config')
 const { config, Generate } = require('express-route-auto')
+const util = require('util')
+
 
 config.add(configs)
 let pathLog = debug('path')
@@ -55,6 +57,10 @@ app.use(express.static(path.join(__dirname, '/Static')))
 // 设置Angular模板目录
 app.use(express.static(path.join(__dirname, '/Template/partials')))
 
+app.get('/', (req, res, next) => {
+  res.send(123)
+})
+
 // 路由日志
 app.use((req, res, next) => {
   pathLog('%s, method: %s', req.path, req.method)
@@ -92,6 +98,9 @@ app.use(expressWinston.errorLogger({
     })
   ]
 }))
+
+console.log(util.inspect(app._router, {depth: 10, showHidden: false}))
+
 
 // 错误页面
 app.use((err, req, res, next) => {
