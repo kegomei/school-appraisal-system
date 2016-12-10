@@ -12,7 +12,6 @@ const configs = require('./config')
 const { config, Generate } = require('express-route-auto')
 const util = require('util')
 
-
 config.add(configs)
 let pathLog = debug('path')
 let appLog = debug('myapp::applog')
@@ -57,10 +56,6 @@ app.use(express.static(path.join(__dirname, '/Static')))
 // 设置Angular模板目录
 app.use(express.static(path.join(__dirname, '/Template/partials')))
 
-app.get('/', (req, res, next) => {
-  res.send(123)
-})
-
 // 路由日志
 app.use((req, res, next) => {
   pathLog('%s, method: %s', req.path, req.method)
@@ -71,7 +66,6 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   let whiteList = [ '^/$', '^/login$', '^/admin/signout$', '^/test', '^/favicon.ico$' ]
   appLog('session: %s, url: %s, In whiteList? : %s, method: %s', req.session.user, req.url, whiteList.indexOf(req.url), req.method)
-  console.error(matchArray(whiteList, req.url), req.url)
   if (!matchArray(whiteList, req.url)) {
     if (req.session.user) {
       next()
@@ -85,10 +79,9 @@ app.use((req, res, next) => {
 // 生成路由
 let generate = new Generate()
 let routes = generate()
+app.use(routes)
 
-app.use('/', routes)
-
-//console.log(util.inspect(app._router,{depth:5, showHidden:true}))
+// console.log(util.inspect(app._router,{depth:5, showHidden:true}))
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
   transports: [
@@ -101,9 +94,6 @@ app.use(expressWinston.errorLogger({
     })
   ]
 }))
-
-console.log(util.inspect(app._router, {depth: 10, showHidden: false}))
-
 
 // 错误页面
 app.use((err, req, res, next) => {

@@ -1,17 +1,12 @@
 const { Action } = require('express-route-auto')
-
 class Index extends Action {
   constructor () {
     super()
-    this.User = this.Model.User
+    this.Item = this.Model.Item
+    this.sequelize = this.Model.sequelize
   }
   _get (req, res, next) {
-    res.render('Layer', {
-      title: req.path,
-      path: {
-        body: 'body/test.html'
-      }
-    })
+    res.send('this is test page')
   }
 
   _post (req, res, next) {

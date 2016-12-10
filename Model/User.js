@@ -18,7 +18,7 @@ class User extends Model {
           isInt: true
         }
       },
-      name: {
+      department: {
         type: Sequelize.STRING(255),
         defaultValue: '0',
         validate: {
@@ -28,7 +28,6 @@ class User extends Model {
         type: Sequelize.STRING(255),
         defaultValue: '0',
         validate: {
-          isUnique: this.seqli.validateIsUnique('openid')
         }
       },
       passwd: {
@@ -41,11 +40,22 @@ class User extends Model {
         type: Sequelize.INTEGER,
         defaultValue: 0,
         validate: {
-          isInt: true
         }
       }
     }, {
       timestamps: true
+    })
+  }
+
+  // 通过部门名字找到 uid
+  findUid (department) {
+    return this.find({
+      where: {
+        department
+      }
+    })
+    .then((row) => {
+      return row.get('id')
     })
   }
 

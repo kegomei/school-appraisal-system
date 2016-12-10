@@ -1,4 +1,3 @@
-
 const Sequelize = require('sequelize')
 const dbConfig = require('./config')
 require('sequelize-isunique-validator')(Sequelize)
@@ -10,13 +9,17 @@ var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.passwd,
 const User = new (require('./User'))(sequelize)
 const File = new (require('./File'))(sequelize)
 const Result = new (require('./Result'))(sequelize)
+const Teacher = new (require('./Teacher'))(sequelize)
+const Item = new (require('./Item'))(sequelize)
 
 class DataBase {
   constructor () {
     this.User = User
     this.File = File
     this.Result = Result
-
+    this.sequelize = sequelize
+    this.Teacher = Teacher
+    this.Item = Item
     sequelize
       .authenticate()
       .then(function (data) {
