@@ -1,4 +1,5 @@
 var app = angular.module('SchoolAssessment', [])
+// 配置
 app
   .config(['$locationProvider', '$httpProvider', function($locationProvider,$httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'  
@@ -35,6 +36,7 @@ app
     }];
   }])
 
+// 登录
 app
   .controller('loginCtrl', ['$scope', function loginCtrl ($scope) {
     $scope.name = 'looading'
@@ -83,6 +85,7 @@ app
     }
   }])
 
+// 文件上传
 app
   .controller('fileTestCtrl', ['$scope', 'testService', function fileTestCtrl ($scope, testService) {
     $scope.lists = []
@@ -98,4 +101,10 @@ app
           console.error(err)
         })
     }
+  }])
+
+// 创建考核
+app
+  .controller('addCreateCtrl', ['$scope', function($scope) {
+    
   }])

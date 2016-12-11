@@ -6,7 +6,9 @@ class Index extends Action {
     this.sequelize = this.Model.sequelize
   }
   _get (req, res, next) {
-    res.send('this is test page')
+    res.send({
+      l: this.Libs.infoMap.length
+    })
   }
 
   _post (req, res, next) {

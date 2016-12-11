@@ -1,7 +1,4 @@
 const { Action } = require('express-route-auto')
-const md5 = require('md5')
-const sha1 = require('sha1')
-
 
 class Index extends Action {
 
@@ -27,7 +24,7 @@ class Index extends Action {
     .then((data) => {
       if (data) {
         req.session.user = {
-          name: data.get('name'),
+          department: data.get('department'),
           account: data.get('account'),
           id: data.get('id'),
           role: data.get('role')
