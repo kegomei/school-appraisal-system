@@ -38,15 +38,15 @@ app
 
 // 登录
 app
-  .controller('loginCtrl', ['$scope', function loginCtrl ($scope) {
-    $scope.name = 'looading'
-  }])
   .controller('loginCtrl',['$scope', '$http', '$timeout', 'loginService', 'alertService', function loginCtrl ($scope, $http, $timeout, loginService, alertService) {
     $scope.items = []
     $scope.isSubmited = false
+    $scope.user = {
+      account: 'jsjxy2016',
+      passwd: 'jsjxy2016'
+    }
     $scope.handleLogin = function() {
       $scope.isSubmited = true
-      console.log('submiting')
       if($scope.login.$valid) {
         loginService
           .login($scope.user)
@@ -56,13 +56,13 @@ app
                 alertService.add({
                   type: 'danger',
                   content: success.msg
-                })
+                }, 1000)
                 break;
               case 200: 
                 alertService.add({
                   type: 'success',
                   content: success.msg
-                })
+                }, 2000)
                 $timeout(function() {
                   window.location.href = success.url
                 }, 1000)
@@ -78,11 +78,15 @@ app
           })
       }
     }
-
-
+    var i = 0;
     $scope.keypressHandle = function(ev) {
-      console.log(ev)
+      console.log(i++)
     }
+    document.addEventListener('keypress', function(ev) {
+      if(ev.keyCode === 13) {
+        $scope.handleLogin()
+      }
+    })
   }])
 
 // 文件上传
@@ -105,6 +109,40 @@ app
 
 // 创建考核
 app
-  .controller('addCreateCtrl', ['$scope', function($scope) {
-    
+  .controller('addCreateCtrl', ['$scope', 'formService', 'alertService', function($scope, formService, alertService) {
+    $scope.isEmpty = false
+    // $scope.form = {
+
+    // }
+    $scope.submit = function() {
+      if ($scope.createForm.$valid) {
+        formService
+          .createTitle({
+            title: $scope.form.chistoryName
+          })
+          .then(function(success) {
+            switch(success.status) {
+              case 200:
+                alertService.add({
+                  type: 'success',
+                  msg: success.msg
+                })
+                break
+              case 304: 
+                alertService.add({
+                  type: 'error',
+                  msg: success.msg
+                })
+                break 
+            }
+          }, function(err) {
+            alertService.add({
+              type: 'error',
+              msg: err.msg
+            })
+          })
+      } else {
+        $scope.isEmpty = true
+      }
+    }
   }])

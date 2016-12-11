@@ -3,7 +3,7 @@ app
     return {
     // priority: 0, 
     // template: '<div></div>', 
-  　　templateUrl: 'Alert.html', 
+  　　templateUrl: '/Alert.html', 
   　　replace: false, 
   　　transclude: true, 
   　　restrict: 'E', 
@@ -14,6 +14,7 @@ app
         $scope.close = function(index) {
           $scope.items.splice(index, 1)
         }
+
       }]
     }
   }])

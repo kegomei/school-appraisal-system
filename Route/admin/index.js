@@ -2,7 +2,7 @@ const { Action } = require('express-route-auto')
 
 class Index extends Action {
   _get (req, res, next) {
-    let Result = this.Model.Result
+    let History = this.Model.History
     let whereOpts = {}
     let { role } = req.session.user
     if (role === 0) {
@@ -12,7 +12,7 @@ class Index extends Action {
         }
       }
     }
-    Result
+    History
       .findAll(whereOpts)
       .then((data) => {
         res.render('Layer', {

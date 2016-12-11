@@ -5,12 +5,57 @@
     <title>杭电考核系统</title>
     <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/app.css">
+    <style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+      }
+      .myalerts {
+        position: fixed;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        z-index: 100;
+      }
+      /*提醒框*/
+    .alert{
+      animation:show 0.4s linear alternate forwards;
+      -webkit-animation:show 0.4s linear alternate forwards;
+      -o-animation:show 0.4s linear alternate forwards;
+      -moz-animation:show 0.4s linear alternate forwards;
+    }
+    @keyframes show{
+      0% {opacity: 0;}
+      50% {opacity: 0.4;}
+      100% {opacity: 1;}
+    }
+    @-moz-keyframes show{
+      0% {opacity: 0;}
+      50% {opacity: 0.4;}
+      100% {opacity: 1;}
+    }
+    @-o-keyframes show{
+      0% {opacity: 0;}
+      50% {opacity: 0.4;}
+      100% {opacity: 1;}
+    }}
+    @-webkit-keyframes show{
+      0% {opacity: 0;}
+      50% {opacity: 0.4;}
+      100% {opacity: 1;}
+    }
+    </style>
   </head>
-  <body ng-app="SchoolAssessment">
+  <body ng-app="SchoolAssessment" ng-cloak>
+    <alerts items="alerts" class="myalerts"></alerts>
     <div class="container-fluid">
       <%- include(page.body) %>
       <%- include('public/footer.html') %>
     </div>
+    <script src="/js/polyfill.min.js"></script>
+    <script src="/js/underscore-min.js"></script>
     <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="//apps.bdimg.com/libs/angular.js/1.5.0-beta.0/angular.js"></script>

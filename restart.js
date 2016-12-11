@@ -4,7 +4,8 @@ require('log-theme')
 // node 服务器自动重启
 nodemon({
   script: 'app.js',
-  ext: 'js json'
+  ext: 'js json',
+  ignore: ['Static/**/*', 'Template/**/*', 'Uploads/**/*', 'Logs/**/*']
 })
 
 nodemon.on('start', () => {

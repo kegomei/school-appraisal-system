@@ -245,6 +245,10 @@ class Result extends Model {
       hid: {
         type: Sequelize.INTEGER,
         defaultValue: ''
+      },
+      uid: {
+        type: Sequelize.INTEGER,
+        defaultValue: ''
       }
     }, {
       timestamps: true

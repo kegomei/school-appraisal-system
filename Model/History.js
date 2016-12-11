@@ -34,6 +34,12 @@ class History extends Model {
       timestamps: true
     })
   }
+  isExisted (obj) {
+    return this.find(obj)
+      .then((data) => {
+        return data
+      })
+  }
 }
 
 module.exports = History
