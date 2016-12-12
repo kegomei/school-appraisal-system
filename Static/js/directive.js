@@ -19,7 +19,6 @@ app
     }
   }])
 
-
 // 编辑表单组件
 app
   .directive('formUnit', ['$log', '$interval', function($log, $interval) {
