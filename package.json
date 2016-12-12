@@ -4,7 +4,7 @@
   "description": "private refs seed",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test/**/*.js --compliers js:babel-core/register",
+    "test": "mocha -t 10000 test/**/*.js --compliers js:babel-core/register",
     "dev": "npm-run-all --parallel start watch",
     "watch": "gulp",
     "start": "node restart.js"

@@ -60,7 +60,9 @@ class User extends Model {
   }
 
   isExisted (obj) {
-    return this.find(obj)
+    return this.find({
+      where: obj
+    })
       .then((data) => {
         return data
       })

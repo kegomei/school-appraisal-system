@@ -1,6 +1,6 @@
 const DataBase = require('./Model')
 
-let { User, File, Result, sequelize, Teacher, Item, History } = new DataBase()
+let { User, File, Result, sequelize, Teacher, Item, History, Category } = new DataBase()
 let Libs = require('./Libs')
 
 module.exports = {
@@ -18,6 +18,7 @@ module.exports = {
     sequelize,
     Teacher,
     Item,
-    History
+    History,
+    Category
   }
 }

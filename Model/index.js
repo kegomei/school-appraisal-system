@@ -12,6 +12,7 @@ const Result = new (require('./Result'))(sequelize)
 const Teacher = new (require('./Teacher'))(sequelize)
 const Item = new (require('./Item'))(sequelize)
 const History = new (require('./History'))(sequelize)
+const Category = new (require('./Category'))(sequelize)
 
 class DataBase {
   constructor () {
@@ -22,6 +23,7 @@ class DataBase {
     this.Teacher = Teacher
     this.Item = Item
     this.History = History
+    this.Category = Category
     sequelize
       .authenticate()
       .then(function (data) {

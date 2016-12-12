@@ -68,6 +68,8 @@ app.use((req, res, next) => {
   appLog('session: %s, url: %s, In whiteList? : %s, method: %s', req.session.user, req.url, whiteList.indexOf(req.url), req.method)
   if (!matchArray(whiteList, req.url)) {
     if (req.session.user) {
+      res.locals.user = req.session.user
+      res.locals.body = req.path
       next()
     } else {
       res.redirect('/login')

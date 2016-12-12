@@ -3,31 +3,33 @@
   <li role="presentation"><a href="#edit" role="tab" data-toggle="tab">编辑考核</a></li>
 </ul>
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="create" ng-controller="addCreateCtrl">
+  <div role="tabpanel" class="tab-pane active" id="create" ng-controller="addFormCtrl">
     <br>
-    <form class="form-inline" role="form" name="createForm">
+    <form class="form" role="form" name="createForm">
       <div class="form-group">
         <label for="chistoryName" class="sr-only">考核记录标题</label>
         <input type="text" class="form-control" id="chistoryName" name="chistoryName" ng-model="form.chistoryName" placeholder="考核记录标题" required>
       </div>
       <button type="button" class="btn btn-primary" ng-click="submit()">创建</button>
       <span class="help-block text-danger" ng-if="isEmpty && createForm.chistoryName.$invalid ">请填写</span>
-      
     </form>
   </div>  
-  <div role="tabpanel" class="tab-pane" id="edit">
+  <div role="tabpanel" class="tab-pane" id="edit" ng-controller="editFormCtrl">
     <br>
-    <form role="form">
+    <form role="form" name="editFrom">
       <div class="form-group">
         <label for="historyName">考核记录标题</label>
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-control" ng-change="handleHistoryChange(this)" ng-model="form.historyId">
+          <% for(var i=0; i < historyList.length; i++) { %>
+            <option value="<%- historyList[i]['id'] %>"><%- historyList[i]['title'] %></option>
+          <% } %>
         </select>
       </div>
     </form>
+    <h4>指标类别</h4>
+    <hr>
+    <div class="p5" ng-repeat="item in categories track by $index">
+      <a class="btn btn-info"  href="{{ item.href }}">{{ item.name }}</a>
+    </div>
   </div>
 </div>

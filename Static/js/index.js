@@ -109,7 +109,7 @@ app
 
 // 创建考核
 app
-  .controller('addCreateCtrl', ['$scope', 'formService', 'alertService', function($scope, formService, alertService) {
+  .controller('addFormCtrl', ['$scope', 'formService', 'alertService', function addFormCtrl ($scope, formService, alertService) {
     $scope.isEmpty = false
     // $scope.form = {
 
@@ -125,24 +125,67 @@ app
               case 200:
                 alertService.add({
                   type: 'success',
-                  msg: success.msg
-                })
+                  content: success.msg
+                }, 1000)
                 break
               case 304: 
                 alertService.add({
-                  type: 'error',
-                  msg: success.msg
-                })
+                  type: 'danger',
+                  content: success.msg
+                }, 1000)
                 break 
             }
           }, function(err) {
             alertService.add({
-              type: 'error',
-              msg: err.msg
-            })
+              type: 'danger',
+              content: err.msg
+            }, 1000)
           })
       } else {
         $scope.isEmpty = true
       }
     }
+  }])
+
+// 编辑考核界面
+app
+  .controller('editFormCtrl', ['$scope', 'formService', function editFormCtrl ($scope, formService) {
+    $scope.categories;
+    $scope.handleHistoryChange = function(ev) {
+      formService
+        .getCategory({
+          hid: ev.form.historyId
+        })
+        .then(function(list) {
+          $scope.categories = list.map(function(item) {
+            item.href = '/admin/form/edit?cid=' + item.id
+            return item
+          })
+          console.log($scope.categories)
+        }, function(err) {
+          console.error(err)
+        })
+    }
+  }])
+
+// 编辑表单界面
+app.
+  controller('editFormInfoCtrl', ['$scope', 'formService', function editFormInfoCtrl ($scope, formService) {
+    $scope.formUnitList = []
+    var i = 0;
+    $scope.addFormUnit = function() {
+      $scope.formUnitList.push({
+        content: 'ssss',
+        index: i++
+      })
+    }
+    $scope.delete = function(ev) {
+      $scope.formUnitList.splice(this.$index,1)
+    }
+    $scope.save = function() {
+      console.log($scope.formUnitList)
+    }
+
+
+
   }])

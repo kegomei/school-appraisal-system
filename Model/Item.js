@@ -242,7 +242,6 @@ class Item extends Model {
       timestamps: true
     })
   }
-
   getComment () {
     let promise = new Promise((resolve, reject) => {
       try {

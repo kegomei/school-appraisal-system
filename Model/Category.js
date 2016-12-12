@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize')
 const Model = require('./Model')
 
-class History extends Model {
+class Category extends Model {
   constructor (seqli) {
     super(seqli)
     this.model = this.initModel()
   }
 
   initModel () {
-    return this.seqli.define('history', {
+    return this.seqli.define('category', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -18,15 +18,9 @@ class History extends Model {
           isInt: true
         }
       },
-      title: {
+      name: {
         type: Sequelize.STRING(255),
         defaultValue: '0',
-        validate: {
-        }
-      },
-      uid: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
         validate: {
         }
       }
@@ -34,14 +28,6 @@ class History extends Model {
       timestamps: true
     })
   }
-  isExisted (obj) {
-    return this.find({
-      where: obj
-    })
-      .then((data) => {
-        return data
-      })
-  }
 }
 
-module.exports = History
+module.exports = Category

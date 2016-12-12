@@ -14,7 +14,7 @@ class CreateTitle extends Action {
         uid: id
       })
       .then(data => {
-        if (data) {
+        if (!data) {
           return History.insert({
             title,
             uid: id
@@ -24,6 +24,7 @@ class CreateTitle extends Action {
             status: 304,
             msg: '已存在该考核'
           })
+          return Promise.reject()
         }
       })
       .then(data => {

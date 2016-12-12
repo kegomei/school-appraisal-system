@@ -14,12 +14,9 @@ class Index extends Action {
   _post (req, res, next) {
     let User = this.Model.User
     let { account, passwd } = req.body
-
     User.isExisted({
-      where: {
-        account,
-        passwd
-      }
+      account,
+      passwd
     })
     .then((data) => {
       if (data) {

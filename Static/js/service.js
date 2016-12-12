@@ -2,7 +2,8 @@ var restUrl = {
   'testSubmit': '',
   'login': '/login',
   'form': {
-    createTitle: 'form/createTitle'
+    createTitle: 'form/createTitle',
+    getCategory: 'form/getCategory'
   }
 }
 

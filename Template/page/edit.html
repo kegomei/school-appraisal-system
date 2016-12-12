@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs" role="tablist" id="myTab">
+  <li role="presentation" class="active"><a href="#edit" role="tab" data-toggle="tab"><%- categoryName %></a></li>
+</ul>
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="edit" ng-controller="editFormInfoCtrl" ng-init='formItemMap=<%- JSON.stringify(formItemMap) %>'>
+    <br>
+    <form-unit ng-repeat="item in formUnitList track by $index" delete="delete()" item="item" form-item-map="formItemMap"></form-unit>
+    <div class="btn-group">
+      <div class="btn btn-primary" ng-click="addFormUnit()">增加栏目</div>
+      <div class="btn btn-info" ng-click="save()">保存</div>
+    </div>
+  </div>
+</div>
